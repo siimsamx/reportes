@@ -1,0 +1,48 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="reportes.list_personas">
+      <field name="name">Listado</field>
+      <field name="model">reportes.persona</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nom_empleado"/>
+          <field name="dep_empleado"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="reportes.list_personas_form">
+      <field name="name">reportes.persona.form</field>
+      <field name="model">reportes.persona</field>
+      <field name="arch" type="xml">
+          <form>
+            <sheet>
+              <separator string="OPERADOR" colspan="2"/>
+              <group name="group_top" colspan="2" col="2">
+                <group>
+                  <field name="nom_empleado"/>
+                </group>
+                <group>
+                  <field name="dep_empleado"/>
+                </group>
+              </group>
+            </sheet>
+          </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="reportes.action_window_personas">
+      <field name="name">Lista de operadores</field>
+      <field name="res_model">reportes.persona</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- menu categories -->
+    <menuitem name="Operadores" id="reportes.personas" parent="reportes.menu_root"/>
+    <!-- actions -->
+    <menuitem name="Listado" id="reportes.personas_list" parent="reportes.personas"
+              action="reportes.action_window_personas"/>
+  </data>
+</odoo>

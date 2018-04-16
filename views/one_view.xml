@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="reportes.list">
+      <field name="name">Listado</field>
+      <field name="model">reportes.trabajo</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="orden_trabajo"/>
+          <field name="orden_compra"/>
+          <field name="num_cotizacion"/>
+          <field name="num_remision"/>
+          <field name="num_pieza"/>
+          <field name="num_parte"/>
+          <field name="fecha_solicitud"/>
+          <field name="fecha_entrega"/>
+          <field name="fecha_real"/>
+
+          <field name="servicios_ids">
+            <tree string="Orden de trabajo">
+              <field name="persona_id"/>
+              <field name="trabajo_id"/>
+            </tree>
+          </field>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="reportes.list_trabajos_form">
+      <field name="name">reportes.trabajo.form</field>
+      <field name="model">reportes.trabajo</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <separator string="ORDEN DE TRABAJO" colspan="2"/>
+             <div class="oe_title">
+              <label for="orden_trabajo" class="oe_edit_only" string="Núm. Orden de trabajo">Núm. Orden de trabajo</label>
+              <h1><field name="orden_trabajo"/></h1>
+            </div>
+              <group name="group_top" colspan="2" col="2">
+                <group>
+                  <field name="orden_compra"/>
+                </group>
+                <group>
+                  <field name="num_cotizacion"/>
+                </group>
+                <group>
+                  <field name="num_remision"/>
+                </group>
+                <group>
+                  <field name="num_pieza"/>
+                </group>
+                <group>
+                  <field name="num_parte"/>
+                </group>
+                <group>
+                  <field name="fecha_solicitud"/>
+                </group>
+                <group>
+                  <field name="fecha_entrega"/>
+                </group>
+                <group>
+                  <field name="fecha_real"/>
+                </group>
+              </group>
+            <field name="servicios_ids"/>
+            <!--Pestañas-->
+            <notebook colspan="4">
+              <page string="Documentos">
+                <group>
+                  <field name="directorio"/>
+                </group>
+              </page>
+              <page string="Notas">
+                <group>
+                  <field name="descripcion"/>
+                </group>
+              </page>
+              <page string="Materiales">
+                <!--field name="nom_material"/>
+                <field name="cantidad_mat"/>
+                <field name="unidad_mat"/-->
+              </page>
+            </notebook>
+          </sheet>
+          <!-- History and communication-->
+          <sheet position="after">
+             <div class="oe_chatter">
+               <field name="message_follower_ids" widget="mail_followers" />
+               <field name="message_ids" widget="mail_thread" />
+             </div>
+          </sheet>
+
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="reportes.action_window">
+      <field name="name">Ordenes de trabajo</field>
+      <field name="res_model">reportes.trabajo</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+    <menuitem name="Reportes" id="reportes.menu_root"/>
+    <!-- menu categories -->
+    <menuitem name="Orden de trabajo" id="reportes.trabajos" parent="reportes.menu_root"/>
+    <!-- actions -->
+    <menuitem name="Listado" id="reportes.trabajos_list" parent="reportes.trabajos"
+              action="reportes.action_window"/>
+  </data>
+</odoo>

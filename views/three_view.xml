@@ -1,0 +1,64 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="reportes.list_actividades_tree">
+      <field name="name">reportes.actividad.tree</field>
+      <field name="model">reportes.actividad</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="num_piezas"/>
+          <field name="tiempo"/>
+          <field name="tiempo_r"/>
+          <field name="tipo_serv"/>
+          <field name="persona_id"/>
+          <field name="trabajo_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="reportes.list_actividades_form">
+      <field name="name">reportes.actividad.form</field>
+      <field name="model">reportes.actividad</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <separator string="SERVICIOS" colspan="2"/>
+              <group>
+                <group>
+                  <field name="num_piezas"/>
+                </group>
+                <group>
+                  <field name="tiempo"/>
+                </group>
+                <group>
+                  <field name="tiempo_r"/>
+                </group>
+                <group>
+                  <field name="tipo_serv"/>
+                </group>
+                <group>
+                  <field name="persona_id"/>
+                </group>
+                <group>
+                  <field name="trabajo_id"/>
+                </group>
+              </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="reportes.action_window_actividades">
+      <field name="name">Lista de servicios</field>
+      <field name="res_model">reportes.actividad</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- menu categories -->
+    <menuitem name="Servicios" id="reportes.actividades" parent="reportes.menu_root"/>
+    <!-- actions -->
+    <menuitem name="Listado" id="reportes.actividades_list" parent="reportes.actividades"
+              action="reportes.action_window_actividades"/>
+  </data>
+</odoo>
